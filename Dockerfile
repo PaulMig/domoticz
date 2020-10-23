@@ -1,9 +1,21 @@
 FROM debian:buster-slim
-WORKDIR /domoticz
-EXPOSE 8080/tcp 443/tcp 6144
-ENTRYPOINT [ "/domoticz/domoticz" ]
+
+ARG APP_HASH
+ARG BUILD_DATE
+
+LABEL org.label-schema.vcs-ref=$APP_HASH \
+      org.label-schema.build-date=$BUILD_DATE
+
+WORKDIR /opt/domoticz
+
 RUN apt-get update -y && \
-    apt-get install -y wget libusb-0.1-4 python3.7-dev libcurl3-gnutls && \
-    wget -q -O domoticz.tgz https://releases.domoticz.com/releases/release/domoticz_linux_x86_64.tgz && \
-    tar xf domoticz.tgz && \
-    rm domoticz.tgz *.txt
+    apt-get install -y wget curl make nano gcc g++ gdb libssl-dev git libcurl4-gnutls-dev libusb-dev python3-dev zlib1g-dev libcereal-dev liblua5.3-dev uthash-dev perl && \
+    mkdir -p /opt/domoticz && \
+    wget -qO- https://releases.domoticz.com/releases/release/domoticz_linux_x86_64.tgz | tar xz -C /opt/domoticz && \
+    sed -i '/update2.html/d' /opt/domoticz/www/html5.appcache && \
+EXPOSE 8080 443 6144
+
+VOLUME /config
+
+ENTRYPOINT [ "/opt/domoticz/domoticz", "-dbase", "/config/domoticz.db", "-log", "/config/domoticz.log" ]
+
