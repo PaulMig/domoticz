@@ -13,7 +13,7 @@ RUN apt-get update -y && \
     mkdir -p /opt/domoticz && \
     wget -qO- https://releases.domoticz.com/releases/release/domoticz_linux_x86_64.tgz | tar xz -C /opt/domoticz && \
     sed -i '/update2.html/d' /opt/domoticz/www/html5.appcache
-    cd domoticz/plugins
+    cd /opt/domoticz/plugins
     git clone https://github.com/rvdvoorde/domoticz-homewizard.git
 
 EXPOSE 8080 443 6144
