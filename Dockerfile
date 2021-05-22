@@ -9,7 +9,8 @@ LABEL org.label-schema.vcs-ref=$APP_HASH \
 WORKDIR /opt/domoticz
 
 RUN apt-get update -y && \
-    apt-get install -y wget curl make nano gcc g++ gdb libssl-dev git libcurl4-gnutls-dev libusb-dev python3-dev zlib1g-dev libcereal-dev liblua5.3-dev uthash-dev perl && \
+    apt-get install -y wget curl make nano gcc g++ gdb libssl-dev git libcurl4-gnutls-dev libusb-dev python3-dev zlib1g-dev libcereal-dev liblua5.3-dev uthash-dev perl python-dev python-pip && \
+    pip install -U pymodbus && \
     mkdir -p /opt/domoticz/domoticz-homewizard && \
     wget -qO- https://releases.domoticz.com/releases/release/domoticz_linux_x86_64.tgz | tar xz -C /opt/domoticz && \
     sed -i '/update2.html/d' /opt/domoticz/www/html5.appcache && \
