@@ -13,13 +13,12 @@ RUN apt-get update -y && \
     pip install -U pymodbus && \
     mkdir -p /opt/domoticz/domoticz-homewizard && \
     wget -qO- https://releases.domoticz.com/releases/release/domoticz_linux_x86_64.tgz | tar xz -C /opt/domoticz && \
-    sed -i '/update2.html/d' /opt/domoticz/www/html5.appcache && \
     git clone https://github.com/rvdvoorde/domoticz-homewizard.git /opt/domoticz/plugins/domoticz-homewizard && \
     cd /opt/domoticz/plugins/domoticz-homewizard && \
     chmod +x plugin.py && \
     rm -R  /opt/domoticz/plugins/domoticz-homewizard/domoticz-homewizard && \
     apt-get install speedtest-cli -y && \
-    git clone https://github.com:addiejanssen/domoticz-solaredge-modbustcp-plugin.git /opt/domoticz/plugins/domoticz-solaredge-modbustcp-plugin && \
+    git clone https://github.com/addiejanssen/domoticz-solaredge-modbustcp-plugin.git /opt/domoticz/plugins/domoticz-solaredge-modbustcp-plugin && \
     cd /opt/domoticz/plugins/domoticz-solaredge-modbustcp-plugin && \
     chmod +x plugin.py && \ 
     pip3 install -r requirements.txt
