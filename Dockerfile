@@ -20,9 +20,9 @@ RUN apt-get update -y && \
     git clone https://github.com/addiejanssen/domoticz-solaredge-modbustcp-plugin.git /opt/domoticz/plugins/domoticz-solaredge-modbustcp-plugin && \  
     cd /opt/domoticz/plugins/domoticz-solaredge-modbustcp-plugin && \
     chmod +x plugin.py && \ 
-    apt-get install  python3-pip && \
+    apt-get install -y python3-pip && \
     pip3 install -r requirements.txt && \
-    apt-get install speedtest-cli -y
+    apt-get install -y speedtest-cli -y
     
 EXPOSE 8080 443 6144
 
